@@ -26,7 +26,11 @@ public:
     }
 
     void buildImage() {
-        print_pgm();
+        string name;
+        cout << "Nombre del archivo de salida\n";
+        cin >> name;
+        cout << "Reconstruyendo imagen...\n";
+        print_pgm(name);
     }
 
     void saveBinary(string filename = "") {
@@ -37,6 +41,7 @@ public:
         if (filename == "")
             filename = "binario.dot";
         tree.exportInfo(filename);
+        cout << "Tamaño archivo " << filename << " = " << filesize(filename) << endl;
     }
 
     void showNodes() {
@@ -80,11 +85,10 @@ private:
         image.close();
     }
 
-    void print_pgm(){
+    void print_pgm(string filename){
         //auto leafs = tree.getLeafNodes();
-        remove("sample_1.pgm");
         fstream image;
-        image.open("sample_1.pgm", ios::out);
+        image.open(filename, ios::out);
         image << "P2" << endl;
         image << "# feep.pgm" << endl;
         image << width << ' ' << height << endl;
@@ -117,7 +121,7 @@ private:
         fstream file;
         file.open(filename, ios::in);
 
-        int width, height;
+        //int width, height;
         file.read((char*)&width, sizeof(int));
         file.read((char*)&height, sizeof(int));
 

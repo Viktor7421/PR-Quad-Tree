@@ -14,6 +14,11 @@ string getLine(fstream& file, int n) {
     return line;
 }
 
+std::ifstream::pos_type filesize(string filename) {
+    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+    return in.tellg(); 
+}
+
 vector<int> splitToInt(string str, char pattern) {
     int posInit = 0;
     int posFound = 0;
